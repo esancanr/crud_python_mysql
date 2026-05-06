@@ -2,7 +2,7 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox, ttk
 
-class formClients:
+class formUsers:
  def form():
   try:
     base = tkinter.Tk()
