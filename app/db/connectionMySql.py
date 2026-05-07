@@ -9,11 +9,11 @@ class   Connection:
   
   try:
    cnx = mysql.connector.connect(
-    host=os.getenv("HOST_DB"),
+    host=os.environ.get("HOST_DB"),
     port=os.environ.get("PORT_DB"),
     user=os.environ.get("USER_DB"),
     password=os.environ.get("PASSWORD_DB"),
-    database =os.environ.get("DATABASE_DB")
+    database =os.environ.get("DATABASE")
     )
    print('Correct Connection')
    

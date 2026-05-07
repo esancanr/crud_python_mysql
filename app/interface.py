@@ -2,8 +2,28 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox, ttk
 
+from db.connectionMySql import *
+from users import *
+
 class formUsers:
- def form():
+ global base
+ base = None
+ global groupBox
+ groupBox = None
+ global textBoxId
+ textBoxId = None
+ global textBoxName
+ textBoxName = None
+ global textBoxLastname
+ textBoxLastname = None
+ global combo
+ combo = None
+ global tree
+ tree = None
+
+def form():
+  global base, groupBox, textBoxId, textBoxName, textBoxLastname, combo, tree
+
   try:
     base = tkinter.Tk()
     base.geometry('1450x300')
@@ -36,8 +56,8 @@ class formUsers:
       width=13,
       font=('arial',10)
       ).grid(row=1, column=0)
-    textBoxId = Entry(groupbox)
-    textBoxId.grid(row=1,column=1)
+    textBoxName = Entry(groupbox)
+    textBoxName.grid(row=1,column=1)
     #Label Last Name
     labelLastName=Label(
       groupbox, 
@@ -45,8 +65,8 @@ class formUsers:
       width=13,
       font=('arial',10)
       ).grid(row=2, column=0)
-    textBoxId = Entry(groupbox)
-    textBoxId.grid(row=2,column=1)
+    textBoxLastname = Entry(groupbox)
+    textBoxLastname.grid(row=2,column=1)
     #Label Gender
     labelGender=Label(
       groupbox, 
@@ -67,7 +87,8 @@ class formUsers:
     #Button Save Information on my data bases
     Button(groupbox, 
            text='Save',
-           width=10 
+           width=10,
+           command= saveRegistry
         ).grid(row=4,column=0)
     #Button Modify Information on my data bases
     Button(groupbox, 
@@ -105,4 +126,29 @@ class formUsers:
   except ValueError as error:
     print("Error to show the iu: {}".format(error))
 
- form()
+
+def saveRegistry():
+  global textBoxName, textBoxLastname, combo, groupBox
+
+  try:
+    name = textBoxName.get()
+    lastname = textBoxLastname.get()
+    gender = combo.get()
+
+    if not name or not lastname or not gender:
+      messagebox.showinfo('Importante:', 'Please complete all fields')
+      return
+    
+    Users.createUsers(name, lastname, gender)
+    messagebox.showinfo('information:','The data was sent')
+
+    #Clean the widgets
+    textBoxId.delete(0, END)
+    combo.delete(0, END)
+    textBoxName.delete(0, END)
+    textBoxLastname.delete(0, END)
+  
+  except ValueError as error:
+    print('Error to save the data {}'.format(error))
+
+form()
