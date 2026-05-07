@@ -1,15 +1,19 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class   Connection:
  def connectionDB():
   
   try:
    cnx = mysql.connector.connect(
-    host='127.0.0.1',
-    port=3306,
-    user='root',
-    password='12.05.16',
-    database = 'users'
+    host=os.getenv("HOST_DB"),
+    port=os.environ.get("PORT_DB"),
+    user=os.environ.get("USER_DB"),
+    password=os.environ.get("PASSWORD_DB"),
+    database =os.environ.get("DATABASE_DB")
     )
    print('Correct Connection')
    
