@@ -1,9 +1,9 @@
 import tkinter
 from tkinter import *
-from tkinter import messagebox, ttk
+from tkinter import ttk
 
-from db.connectionMySql import *
-from users import *
+from database.connectionMySql import *
+from controllers.save_user import saveRegistry
 
 class formUsers:
  global base
@@ -88,7 +88,12 @@ def form():
     Button(groupbox, 
            text='Save',
            width=10,
-           command= saveRegistry
+           command=lambda: saveRegistry(
+                  textBoxId,
+                  textBoxName,
+                  textBoxLastname,
+                    combo
+            )
         ).grid(row=4,column=0)
     #Button Modify Information on my data bases
     Button(groupbox, 
@@ -122,33 +127,7 @@ def form():
 
     tree.pack()
 
-    base.mainloop()
   except ValueError as error:
     print("Error to show the iu: {}".format(error))
-
-
-def saveRegistry():
-  global textBoxName, textBoxLastname, combo, groupBox
-
-  try:
-    name = textBoxName.get()
-    lastname = textBoxLastname.get()
-    gender = combo.get()
-
-    if not name or not lastname or not gender:
-      messagebox.showinfo('Importante:', 'Please complete all fields')
-      return
-    
-    Users.createUsers(name, lastname, gender)
-    messagebox.showinfo('information:','The data was sent')
-
-    #Clean the widgets
-    textBoxId.delete(0, END)
-    combo.delete(0, END)
-    textBoxName.delete(0, END)
-    textBoxLastname.delete(0, END)
-  
-  except ValueError as error:
-    print('Error to save the data {}'.format(error))
 
 form()

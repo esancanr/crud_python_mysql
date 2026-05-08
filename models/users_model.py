@@ -1,4 +1,4 @@
-from db.connectionMySql import *
+from database.connectionMySql import *
 
 class Users:
  def createUsers(name, lastname, gender):
@@ -12,7 +12,7 @@ class Users:
     cursor.execute(sql, values)
     cnx.commit()
 
-    print(cursor.rowcount, 'Mew Regestry')
+    print(cursor.rowcount, 'New Regestry')
 
     cursor.close()
     cnx.close()
