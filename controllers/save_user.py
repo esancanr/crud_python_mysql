@@ -1,6 +1,5 @@
-from models.users_model import Users
-from tkinter import messagebox
-from tkinter import END
+from models.create_users import Users
+from tkinter import messagebox, END
 
 
 def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo):
@@ -18,10 +17,8 @@ def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo):
     messagebox.showinfo('information:','The data was sent')
 
     #Clean the widgets
-    textBoxId.delete(0, END)
-    combo.delete(0, END)
-    textBoxName.delete(0, END)
-    textBoxLastname.delete(0, END)
+    for widget in [textBoxName, textBoxLastname, textBoxId, combo]:
+      widget.delete(0, END)
   
   except ValueError as error:
     print('Error to save the data {}'.format(error))

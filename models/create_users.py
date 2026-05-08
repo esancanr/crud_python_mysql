@@ -1,4 +1,4 @@
-from database.connectionMySql import *
+from database.connectionMySql import Connection, mysql
 
 class Users:
  def createUsers(name, lastname, gender):

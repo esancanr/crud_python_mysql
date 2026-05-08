@@ -4,6 +4,7 @@ from tkinter import ttk
 
 from database.connectionMySql import *
 from controllers.save_user import saveRegistry
+from models.show_users import showUsers
 
 class formUsers:
  global base
@@ -124,6 +125,9 @@ def form():
     for col in columns:
         tree.heading(col, text=col)
         tree.column(col, anchor="center")
+
+    for row in showUsers():
+      tree.insert('', 'end', values=row)
 
     tree.pack()
 
