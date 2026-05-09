@@ -1,18 +1,21 @@
 from database.connectionMySql import Connection, mysql
 
 
-def createUsers(name, lastname, gender):
+def modifyUser(userId ,name, lastName, gender):
   try:
     cnx = Connection.connectionDB()
     cursor = cnx.cursor()
-
-    sql ='INSERT INTO persons values(null,%s,%s,%s);'
-    values = (name, lastname, gender)
+    sql = """
+        UPDATE persons
+        SET userName=%s, lastName=%s, Gender=%s
+        WHERE id=%s
+        """
+    values = (name, lastName, gender, userId)
 
     cursor.execute(sql, values)
     cnx.commit()
 
-    print(cursor.rowcount, 'New Registry')
+    print(cursor.rowcount, 'Update Registry')
 
     cnx.close()
   except mysql.connector.Error as error:

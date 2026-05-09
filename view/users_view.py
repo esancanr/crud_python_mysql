@@ -3,7 +3,9 @@ from tkinter import LabelFrame, Label, Entry, ttk, Button
 
 
 from models.show_users import showUsers
-from controllers.save_user import saveRegistry
+from controllers.button_save_registry import saveRegistry
+from models.select_user import selectRegistry
+from controllers.button_modify_registry import modifyRegistry
 
 class formUsers:
  global base
@@ -99,7 +101,14 @@ def form():
     #Button Modify Information on my data bases
     Button(groupbox, 
            text='Modify',
-           width=10 
+           width=10,
+           command=lambda: modifyRegistry(
+                  textBoxId, 
+                  textBoxName, 
+                  textBoxLastname, 
+                  combo, 
+                  tree
+            )
         ).grid(row=4,column=1)
     #Button Delete Information on my Data Bases
     Button(groupbox, 
@@ -118,16 +127,26 @@ def form():
     groupBox.grid(row=0,column=1,padx=5,pady=5)
 
     '''TREEVIEW'''
-    columns = ("Id", "Nombres", "Apellidos", "Sexo")
+    columns = ("Id", "Name", "Last Name", "Gender")
 
     tree = ttk.Treeview(groupBox, columns=columns, show='headings')
 
     for col in columns:
         tree.heading(col, text=col)
         tree.column(col, anchor="center")
-
+    #Show data on the table
     for row in showUsers():
       tree.insert('', 'end', values=row)
+
+    #Select registry
+    tree.bind('<<TreeviewSelect>>', lambda event: selectRegistry(
+        event,
+        tree,
+        textBoxId,
+        textBoxName,
+        textBoxLastname,
+        combo
+    ))
 
     tree.pack()
 

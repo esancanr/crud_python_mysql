@@ -1,10 +1,10 @@
 from tkinter import messagebox, END
 
-from models.create_users import Users
+from models.create_users import createUsers
 from models.update_tree_view import updateTreeView
 
 
-def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo, tree):
+def saveRegistry(textBoxId, textBoxName, textBoxLastname, combo, tree):
 
   try:
     name = textBoxName.get()
@@ -15,7 +15,7 @@ def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo, tree):
       messagebox.showinfo('Importante:', 'Please complete all fields')
       return
     
-    Users.createUsers(name, lastname, gender)
+    createUsers(name, lastname, gender)
     messagebox.showinfo('information:','The data was sent')
 
     updateTreeView(tree)
