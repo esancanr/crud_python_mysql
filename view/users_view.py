@@ -1,10 +1,9 @@
 import tkinter
-from tkinter import *
-from tkinter import ttk
+from tkinter import LabelFrame, Label, Entry, ttk, Button
 
-from database.connectionMySql import *
-from controllers.save_user import saveRegistry
+
 from models.show_users import showUsers
+from controllers.save_user import saveRegistry
 
 class formUsers:
  global base
@@ -93,7 +92,8 @@ def form():
                   textBoxId,
                   textBoxName,
                   textBoxLastname,
-                    combo
+                  combo,
+                  tree
             )
         ).grid(row=4,column=0)
     #Button Modify Information on my data bases

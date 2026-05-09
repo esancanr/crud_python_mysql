@@ -1,8 +1,10 @@
-from models.create_users import Users
 from tkinter import messagebox, END
 
+from models.create_users import Users
+from models.update_tree_view import updateTreeView
 
-def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo):
+
+def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo, tree):
 
   try:
     name = textBoxName.get()
@@ -15,6 +17,8 @@ def saveRegistry( textBoxId, textBoxName, textBoxLastname, combo):
     
     Users.createUsers(name, lastname, gender)
     messagebox.showinfo('information:','The data was sent')
+
+    updateTreeView(tree)
 
     #Clean the widgets
     for widget in [textBoxName, textBoxLastname, textBoxId, combo]:
