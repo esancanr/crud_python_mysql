@@ -7,4 +7,4 @@ def updateTreeView(tree):
      for row in showUsers():
         tree.insert('', 'end', values=row)
     except ValueError as error:
-       print('Error to update the data {}'.format(error))
+       print('Error to update the treeview {}'.format(error))

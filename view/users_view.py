@@ -3,9 +3,10 @@ from tkinter import LabelFrame, Label, Entry, ttk, Button
 
 
 from models.show_users import showUsers
-from controllers.button_save_registry import saveRegistry
 from models.select_user import selectRegistry
+from controllers.button_save_registry import saveRegistry
 from controllers.button_modify_registry import modifyRegistry
+from controllers.button_delete_registry import deleteRegistry
 
 class formUsers:
  global base
@@ -113,7 +114,13 @@ def form():
     #Button Delete Information on my Data Bases
     Button(groupbox, 
            text='Delete',
-           width=10 
+           width=10,
+           command= lambda: deleteRegistry(
+            textBoxId, 
+            tree, 
+            textBoxName, 
+            textBoxLastname, 
+            combo)
         ).grid(row=4,column=3)
     
     '''GROUP BOX'''

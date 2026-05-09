@@ -1,20 +1,22 @@
 from database.connectionMySql import Connection, mysql
 
 
-def createUsers(name, lastname, gender):
+def deleteUser(userId):
   try:
     cnx = Connection.connectionDB()
     cursor = cnx.cursor()
-
-    sql ='INSERT INTO persons values(null,%s,%s,%s);'
-    values = (name, lastname, gender)
+    sql = '''
+        DELETE FROM persons
+        WHERE id = %s;
+        '''
+    values = (userId,)
 
     cursor.execute(sql, values)
     cnx.commit()
 
-    print(cursor.rowcount, 'New Registry')
+    print(cursor.rowcount, 'Delete Registry')
 
     cnx.close()
   except mysql.connector.Error as error:
-    print("Error to insert registry{}".format(error))
+    print("Error to delete the registry{}".format(error))
   

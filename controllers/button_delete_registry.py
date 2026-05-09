@@ -1,22 +1,19 @@
 from tkinter import messagebox, END
 
-from models.modify_user import modifyUser
+from models.delete_user import deleteUser
 from models.update_tree_view import updateTreeView
 
 
-def modifyRegistry(textBoxId, textBoxName, textBoxLastname, combo, tree):
+def deleteRegistry(textBoxId, tree, textBoxName, textBoxLastname, combo):
 
   try:
     userId = textBoxId.get()
-    name = textBoxName.get()
-    lastname = textBoxLastname.get()
-    gender = combo.get()
 
-    if not userId or not name or not lastname or not gender:
+    if not userId:
       messagebox.showinfo('Importante:', 'Please complete all fields')
       return
     
-    modifyUser(userId, name, lastname, gender)
+    deleteUser(userId)
     messagebox.showinfo('information:','The data was updated')
 
     updateTreeView(tree)
@@ -26,4 +23,4 @@ def modifyRegistry(textBoxId, textBoxName, textBoxLastname, combo, tree):
       widget.delete(0, END)
   
   except ValueError as error:
-    print('Error to modify the data {}'.format(error))
+    print('Error to delete the data {}'.format(error))
